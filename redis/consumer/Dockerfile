@@ -3,7 +3,7 @@ COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build
 
-FROM openjdk:8-jre-slim
+FROM openjdk:11.0.16-jre-slim
 EXPOSE 8080
 COPY --from=build /home/gradle/src/build/libs/consumer-0.0.1-SNAPSHOT.jar /app/
 RUN bash -c 'touch /app/consumer-0.0.1-SNAPSHOT.jar'
