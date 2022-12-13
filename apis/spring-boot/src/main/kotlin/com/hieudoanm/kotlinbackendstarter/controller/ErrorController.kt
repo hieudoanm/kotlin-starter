@@ -35,7 +35,7 @@ class ErrorController {
 
 		// environment-based logic
 		val stackTraceMessage =
-			when (System.getenv("ENV").toUpperCase()) {
+			when (System.getenv("ENV").uppercase()) {
 				"STAGING" -> stackTrace // returning the stack trace
 				"PRODUCTION" -> null // returning no stack trace
 				else -> stackTrace // default behavior
