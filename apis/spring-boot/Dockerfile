@@ -5,6 +5,6 @@ RUN gradle build
 
 FROM openjdk:11.0.16-jre-slim
 EXPOSE 8080
-COPY --from=build /home/gradle/src/build/libs/consumer-0.0.1-SNAPSHOT.jar /app/
-RUN bash -c 'touch /app/consumer-0.0.1-SNAPSHOT.jar'
-ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/consumer-0.0.1-SNAPSHOT.jar"]
+COPY --from=build /home/gradle/src/build/libs/spring-boot-0.0.1-SNAPSHOT.jar /app/
+RUN bash -c 'touch /app/spring-boot-0.0.1-SNAPSHOT.jar'
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/spring-boot-0.0.1-SNAPSHOT.jar"]

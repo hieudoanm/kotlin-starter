@@ -20,6 +20,7 @@ jobs:
             version: 17
         project:
           - name: APIs - Spring Boot
+            image-name: spring-boot
             working-directory: ./apis/spring-boot
           - name: ActiveMQ - Producer
             image-name: active-producer
