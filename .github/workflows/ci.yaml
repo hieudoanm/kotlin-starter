@@ -22,6 +22,8 @@ jobs:
             distribution: corretto
             version: 17
         project:
+          - name: APIs - Spring Boot
+            working-directory: ./apis/spring
           - name: Messages - ActiveMQ - Producer
             working-directory: ./messages/active/producer
           - name: Messages - ActiveMQ - Consumer

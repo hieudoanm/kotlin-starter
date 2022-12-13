@@ -5,9 +5,6 @@ on:
     branches:
       - master
       - develop
-      - hotfix/**
-      - feature/**
-      - renovate/**
 
 jobs:
   github-actions:
@@ -22,6 +19,8 @@ jobs:
             distribution: corretto
             version: 17
         project:
+          - name: APIs - Spring Boot
+            working-directory: ./apis/spring-boot
           - name: ActiveMQ - Producer
             image-name: active-producer
             working-directory: ./messages/active/producer

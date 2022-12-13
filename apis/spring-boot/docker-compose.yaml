@@ -1,0 +1,19 @@
+version: "3.9"
+
+volumes:
+    postgres_data:
+        driver: local
+
+services:
+    kotlin-postgres:
+        restart: unless-stopped
+        image: postgres:latest
+        container_name: kotlin-postgres
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: kotlinuser
+            POSTGRES_PASSWORD: kotlinpass
