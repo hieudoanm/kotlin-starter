@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - hotfix/**
+      - feature/**
+      - renovate/**
+
+jobs:
+  github-actions:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - name: Ubuntu
+            version: ubuntu-latest
+        java:
+          - name: Corretto 17
+            distribution: corretto
+            version: 17
+        project:
+          - name: Messages - ActiveMQ - Producer
+            working-directory: ./messages/active/producer
+          - name: Messages - ActiveMQ - Consumer
+            working-directory: ./messages/active/consumer
+          - name: Messages - gRPC - Producer
+            working-directory: ./messages/active/producer
+          - name: Messages - gRPC - Consumer
+            working-directory: ./messages/active/consumer
+          - name: Messages - Kafka - Producer
+            working-directory: ./messages/kafka/producer
+          - name: Messages - Kafka - Consumer
+            working-directory: ./messages/kafka/consumer
+          - name: Messages - RabbitMQ - Producer
+            working-directory: ./messages/rabbit/producer
+          - name: Messages - RabbitMQ - Consumer
+            working-directory: ./messages/rabbit/consumer
+          - name: Messages - Redis - Producer
+            working-directory: ./messages/redis/producer
+          - name: Messages - Redis - Consumer
+            working-directory: ./messages/redis/consumer
+          - name: Messages - SQS - Producer
+            working-directory: ./messages/redis/producer
+          - name: Messages - SQS - Consumer
+            working-directory: ./messages/redis/consumer
+    name: ${{ matrix.os.name }} - ${{ matrix.java.name }} - ${{ matrix.project.name }}
+    runs-on: ${{ matrix.os.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: ${{ matrix.java.distribution }}
+          java-version: ${{ matrix.java.version }}
+      - name: Build JAR
+        run: ./gradlew jar
+        working-directory: ${{ matrix.project.working-directory }}
